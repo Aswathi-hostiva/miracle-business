@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { Navbar } from '@/components/Navbar';
 import { Footer } from '@/components/Footer';
 import { RiceBagPackaging } from '@/components/RiceBagPackaging';
-import { RealisticRicePacket } from '@/components/RealisticRicePacket';
+import { SingleRicePacket } from '@/components/SingleRicePacket';
 import { GlobalMapGraphic } from '@/components/GlobalMapGraphic';
 import { IconSetCollection } from '@/components/IconSetCollection';
 import { BackgroundTextureWatermark } from '@/components/BackgroundTextureWatermark';
@@ -17,6 +17,7 @@ export default function Home() {
       line1: 'Steam',
       line2: 'Basmati Rice',
       variant: 'green' as const,
+      image: '/generated/pkg_green_1121.png',
     },
     {
       id: '1121-sella',
@@ -24,6 +25,7 @@ export default function Home() {
       line1: 'Sella',
       line2: 'Basmati Rice',
       variant: 'cream' as const,
+      image: '/generated/pkg_cream_1509.png',
     },
     {
       id: '1121-golden-sella',
@@ -31,6 +33,7 @@ export default function Home() {
       line1: 'Golden Sella',
       line2: 'Basmati Rice',
       variant: 'gold' as const,
+      image: '/generated/pkg_gold_sella.png',
     },
     {
       id: '1121-creamy-sella',
@@ -38,6 +41,7 @@ export default function Home() {
       line1: 'Creamy Sella',
       line2: 'Basmati Rice',
       variant: 'cream' as const,
+      image: '/generated/pkg_cream_1121_creamy.png',
     },
     {
       id: '1509-steam',
@@ -45,6 +49,7 @@ export default function Home() {
       line1: 'Steam',
       line2: 'Basmati Rice',
       variant: 'green' as const,
+      image: '/generated/pkg_green_parboiled.png',
     },
     {
       id: '1509-golden-sella',
@@ -52,6 +57,7 @@ export default function Home() {
       line1: 'Golden Sella',
       line2: 'Basmati Rice',
       variant: 'gold' as const,
+      image: '/generated/pkg_gold_1509_golden.png',
     },
     {
       id: '1509-creamy-sella',
@@ -59,6 +65,7 @@ export default function Home() {
       line1: 'Creamy Sella',
       line2: 'Basmati Rice',
       variant: 'cream' as const,
+      image: '/generated/pkg_cream_1509_creamy.png',
     }
   ];
 
@@ -200,10 +207,11 @@ export default function Home() {
                 className="shrink-0 w-[170px] sm:w-[185px] xl:w-full bg-[#fcfaf5] rounded-xl p-3 sm:p-4 border border-[#E7DDC9] shadow-2xs hover:shadow-md transition-all flex flex-col justify-between items-center text-center group"
               >
                 <div className="w-full mb-3 flex items-center justify-center">
-                  <RealisticRicePacket 
-                    variant={item.variant}
+                  <SingleRicePacket
                     code={item.code}
                     name={`${item.line1} ${item.line2}`}
+                    image={item.image}
+                    compact
                   />
                 </div>
 
@@ -245,7 +253,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 5. PACKAGING DESIGNED AROUND YOUR MARKET (MATCHED EXACTLY TO REFERENCE IMAGE) */}
+      {/* 5. PACKAGING DESIGNED AROUND YOUR MARKET */}
       <section className="relative z-10 w-full py-16 sm:py-24 bg-[#F8F5EC]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
@@ -286,7 +294,7 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Right Column: Exact Reference Image Product Packaging Lineup */}
+            {/* Right Column: Individual product packaging */}
             <div className="lg:col-span-7 flex items-center justify-center">
               <RiceBagPackaging />
             </div>
@@ -296,7 +304,7 @@ export default function Home() {
       </section>
 
       {/* 6. GLOBAL PRESENCE */}
-      <section className="relative z-10 w-full py-16 sm:py-24 bg-[#1a3d2e] text-[#f4efe6]">
+      <section className="relative z-10 w-full py-12 sm:py-16 bg-[#1a3d2e] text-[#f4efe6]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <GlobalMapGraphic />
         </div>

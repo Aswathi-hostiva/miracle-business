@@ -2,21 +2,21 @@ import React from 'react';
 
 export const GlobalMapGraphic: React.FC = () => {
   return (
-    <div className="relative w-full bg-[#1a3d2e] text-[#f4efe6] py-10 sm:py-12 px-4 sm:px-6 lg:px-8">
+    <div className="relative w-full bg-[#1a3d2e] text-[#f4efe6] py-6 sm:py-8 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
         
         {/* Left Side: Header & Markets List EXACT RECREATION OF REFERENCE */}
-        <div className="lg:col-span-4 space-y-6 text-center lg:text-left">
+        <div className="lg:col-span-4 space-y-7 text-center lg:text-left">
           <div>
-            <h2 className="font-serif text-2xl sm:text-3xl lg:text-4xl font-bold leading-tight text-[#f4efe6]">
+            <h2 className="font-serif text-3xl sm:text-4xl lg:text-4xl font-bold leading-tight text-[#f4efe6]">
               FROM INDIA.
             </h2>
-            <h2 className="font-serif text-2xl sm:text-3xl lg:text-4xl font-bold leading-tight text-[#f4efe6]">
+            <h2 className="font-serif text-3xl sm:text-4xl lg:text-4xl font-bold leading-tight text-[#f4efe6]">
               CONNECTED TO THE WORLD.
             </h2>
           </div>
 
-          <div className="space-y-3 pt-2 flex flex-col items-center lg:items-start">
+          <div className="space-y-4 pt-2 flex flex-col items-center lg:items-start">
             {[
               'GCC',
               'Europe',
@@ -24,9 +24,9 @@ export const GlobalMapGraphic: React.FC = () => {
               'Asia',
               'North America'
             ].map((market) => (
-              <div key={market} className="flex items-center space-x-3 text-xs sm:text-sm font-medium text-[#f4efe6]">
-                <div className="w-5 h-5 rounded-full border border-[#c9a227] flex items-center justify-center text-[#c9a227] shrink-0 bg-[#122b20]">
-                  <svg viewBox="0 0 24 24" fill="currentColor" className="w-3 h-3">
+              <div key={market} className="flex items-center space-x-3 text-sm sm:text-base lg:text-lg font-medium text-[#f4efe6]">
+                <div className="w-6 h-6 rounded-full border border-[#c9a227] flex items-center justify-center text-[#c9a227] shrink-0 bg-[#122b20]">
+                  <svg viewBox="0 0 24 24" fill="currentColor" className="w-3.5 h-3.5">
                     <path d="M12 2C11.5 5 9.5 7.5 7 9c2.5 1.5 4.5 4 5 7 0.5-3 2.5-5.5 5-7-2.5-1.5-4.5-4-5-7z" />
                   </svg>
                 </div>

@@ -27,7 +27,7 @@ export const Navbar: React.FC = () => {
             alt="Miracle Business Hub"
             width={480}
             height={240}
-            className="h-24 sm:h-44 md:h-52 w-auto object-contain -my-4 sm:-my-14"
+            className="h-32 sm:h-60 md:h-[17rem] w-auto object-contain -my-6 sm:-my-20 md:-my-[4.5rem]"
             priority
           />
         </Link>
