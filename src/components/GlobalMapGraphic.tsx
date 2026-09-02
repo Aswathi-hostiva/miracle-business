@@ -56,6 +56,7 @@ export const GlobalMapGraphic: React.FC = () => {
               <path d="M 660 190 Q 560 240 520 280" />
               <path d="M 660 190 Q 740 160 800 180" />
               <path d="M 660 190 Q 400 30 200 120" />
+              <path d="M 660 190 L 700 132" stroke="#f5d77f" strokeWidth="1.25" />
             </g>
 
             {/* Target Ports Markers */}
@@ -72,6 +73,14 @@ export const GlobalMapGraphic: React.FC = () => {
               <circle cx="0" cy="0" r="5" fill="#c9a227" />
               <text x="12" y="4" fill="#f4efe6" fontSize="14" fontWeight="bold" fontFamily="serif">Head Office</text>
               <text x="12" y="19" fill="#c9a227" fontSize="12" fontFamily="sans-serif">Kerala, India</text>
+            </g>
+
+            {/* Manufacturing Unit Pin: Karnal, Haryana */}
+            <g transform="translate(700, 132)">
+              <circle cx="0" cy="0" r="8" fill="#c9a227" opacity="0.3" className="animate-ping" />
+              <circle cx="0" cy="0" r="4" fill="#c9a227" />
+              <text x="12" y="4" fill="#c9a227" fontSize="13" fontWeight="bold" fontFamily="sans-serif">MANUFACTURING UNIT</text>
+              <text x="12" y="19" fill="#f4efe6" fontSize="11" fontFamily="sans-serif">Karnal, Haryana</text>
             </g>
 
             {/* Control Office Pin: Sohar, Oman - larger, bolder text for mobile legibility */}

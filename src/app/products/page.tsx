@@ -84,13 +84,13 @@ export default function ProductsPage() {
               key={item.id} 
               className="flex flex-col items-center text-center bg-white rounded-lg p-6 shadow-sm border border-stone-200 hover:shadow-md transition-all h-full"
             >
-              <div className="relative aspect-[3/4] w-full max-w-[210px] rounded overflow-hidden mb-5 bg-[#fbf9f5] flex items-center justify-center p-2">
-                <SingleRicePacket 
-                  code={item.code}
-                  name={item.name}
-                  image={item.image}
-                />
-              </div>
+              <div className="relative aspect-[3/4] w-full max-w-[240px] rounded overflow-hidden mb-5 bg-[#fbf9f5] flex items-center justify-center p-0">
+  <SingleRicePacket 
+    code={item.code}
+    name={item.name}
+    image={item.image}
+  />
+</div>
 
               <div className="mt-auto space-y-1 w-full">
                 <span className="font-serif text-base font-bold text-[#1a3d2e] block leading-tight">{item.code}</span>

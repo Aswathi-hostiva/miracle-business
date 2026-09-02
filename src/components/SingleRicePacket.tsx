@@ -15,7 +15,7 @@ export function SingleRicePacket({
 }: SingleRicePacketProps) {
   return (
     <div
-      className={`relative w-full ${compact ? 'max-w-[130px]' : 'max-w-[170px]'} aspect-[3/4.5] overflow-hidden rounded-t-2xl border border-[#e2d6be] bg-[#f8f5ec] shadow-xl`}
+     className={`relative w-full ${compact ? 'max-w-[150px]' : 'max-w-[240px]'} aspect-[3/4.5] overflow-hidden rounded-t-2xl border border-[#e2d6be] bg-[#f8f5ec] shadow-xl`}
     >
       {image ? (
         <Image
@@ -23,7 +23,7 @@ export function SingleRicePacket({
           alt={`${code} ${name} packaging`}
           fill
           sizes={compact ? '(max-width: 640px) 115px, 130px' : '(max-width: 768px) 170px, 210px'}
-          className="object-contain p-1.5 transition-transform duration-300 group-hover:scale-105"
+          className="object-contain transition-transform duration-300 group-hover:scale-105"
         />
       ) : (
         <div className="flex h-full flex-col items-center justify-center bg-[#f8f5ec] p-4 text-center">
