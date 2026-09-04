@@ -1,7 +1,8 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import Link from 'next/link';
+import emailjs from '@emailjs/browser';
 import { Navbar } from '@/components/Navbar';
 import { Footer } from '@/components/Footer';
 import { BackgroundTextureWatermark } from '@/components/BackgroundTextureWatermark';
@@ -9,10 +10,33 @@ import { Send, Phone, Mail, MapPin, CheckCircle2 } from 'lucide-react';
 
 export default function ContactPage() {
   const [submitted, setSubmitted] = useState(false);
+  const [sending, setSending] = useState(false);
+  const formRef = useRef<HTMLFormElement>(null);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setSubmitted(true);
+
+    if (!formRef.current) return;
+
+    setSending(true);
+
+    emailjs
+      .sendForm(
+        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
+        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!,
+        formRef.current,
+        process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!
+      )
+      .then(() => {
+        setSubmitted(true);
+        setSending(false);
+        formRef.current?.reset();
+      })
+      .catch((error) => {
+        console.error('EmailJS error:', error);
+        setSending(false);
+        alert('Something went wrong. Please try again or contact us directly.');
+      });
   };
 
   const productOptions = [
@@ -102,24 +126,27 @@ export default function ContactPage() {
                 </button>
               </div>
             ) : (
-              <form onSubmit={handleSubmit} className="space-y-4">
+              <form ref={formRef} onSubmit={handleSubmit} className="space-y-4">
                 
                 {/* Row 1: Your Name*, Company Name*, Email* */}
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                   <input 
                     type="text" 
+                    name="name"
                     placeholder="Your Name *" 
                     className="w-full px-4 py-3 rounded bg-[#1a3d2e] border border-[#c9a227]/30 text-xs text-[#f4efe6] placeholder-[#f4efe6]/60 focus:outline-none focus:border-[#c9a227]" 
                     required
                   />
                   <input 
                     type="text" 
+                    name="company"
                     placeholder="Company Name *" 
                     className="w-full px-4 py-3 rounded bg-[#1a3d2e] border border-[#c9a227]/30 text-xs text-[#f4efe6] placeholder-[#f4efe6]/60 focus:outline-none focus:border-[#c9a227]" 
                     required
                   />
                   <input 
                     type="email" 
+                    name="email"
                     placeholder="Email *" 
                     className="w-full px-4 py-3 rounded bg-[#1a3d2e] border border-[#c9a227]/30 text-xs text-[#f4efe6] placeholder-[#f4efe6]/60 focus:outline-none focus:border-[#c9a227]" 
                     required
@@ -130,17 +157,19 @@ export default function ContactPage() {
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                   <input 
                     type="tel" 
+                    name="whatsapp"
                     placeholder="WhatsApp / Phone *" 
                     className="w-full px-4 py-3 rounded bg-[#1a3d2e] border border-[#c9a227]/30 text-xs text-[#f4efe6] placeholder-[#f4efe6]/60 focus:outline-none focus:border-[#c9a227]" 
                     required
                   />
                   <input 
                     type="text" 
+                    name="country"
                     placeholder="Country *" 
                     className="w-full px-4 py-3 rounded bg-[#1a3d2e] border border-[#c9a227]/30 text-xs text-[#f4efe6] placeholder-[#f4efe6]/60 focus:outline-none focus:border-[#c9a227]" 
                     required
                   />
-                  <select className="w-full px-4 py-3 rounded bg-[#1a3d2e] border border-[#c9a227]/30 text-xs text-[#f4efe6] focus:outline-none focus:border-[#c9a227]">
+                  <select name="rice_variety" className="w-full px-4 py-3 rounded bg-[#1a3d2e] border border-[#c9a227]/30 text-xs text-[#f4efe6] focus:outline-none focus:border-[#c9a227]">
                     <option value="">Required Rice Variety *</option>
                     {productOptions.map((opt) => (
                       <option key={opt} value={opt}>{opt}</option>
@@ -150,7 +179,7 @@ export default function ContactPage() {
 
                 {/* Row 3: Packing Size*, Required Quantity*, Destination Port* */}
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                  <select className="w-full px-4 py-3 rounded bg-[#1a3d2e] border border-[#c9a227]/30 text-xs text-[#f4efe6] focus:outline-none focus:border-[#c9a227]">
+                  <select name="packing_size" className="w-full px-4 py-3 rounded bg-[#1a3d2e] border border-[#c9a227]/30 text-xs text-[#f4efe6] focus:outline-none focus:border-[#c9a227]">
                     <option value="">Packing Size *</option>
                     {packageSizes.map((sz) => (
                       <option key={sz} value={sz}>{sz}</option>
@@ -158,12 +187,14 @@ export default function ContactPage() {
                   </select>
                   <input 
                     type="text" 
+                    name="quantity"
                     placeholder="Required Quantity *" 
                     className="w-full px-4 py-3 rounded bg-[#1a3d2e] border border-[#c9a227]/30 text-xs text-[#f4efe6] placeholder-[#f4efe6]/60 focus:outline-none focus:border-[#c9a227]" 
                     required
                   />
                   <input 
                     type="text" 
+                    name="destination_port"
                     placeholder="Destination Port *" 
                     className="w-full px-4 py-3 rounded bg-[#1a3d2e] border border-[#c9a227]/30 text-xs text-[#f4efe6] placeholder-[#f4efe6]/60 focus:outline-none focus:border-[#c9a227]" 
                     required
@@ -175,6 +206,7 @@ export default function ContactPage() {
                   <div className="lg:col-span-8">
                     <textarea 
                       rows={2} 
+                      name="message"
                       placeholder="Message" 
                       className="w-full px-4 py-3 rounded bg-[#1a3d2e] border border-[#c9a227]/30 text-xs text-[#f4efe6] placeholder-[#f4efe6]/60 focus:outline-none focus:border-[#c9a227]"
                     ></textarea>
@@ -182,9 +214,10 @@ export default function ContactPage() {
                   <div className="lg:col-span-4">
                     <button 
                       type="submit" 
-                      className="w-full py-3.5 rounded bg-[#c9a227] text-[#1a3d2e] font-bold text-xs uppercase tracking-wider text-center flex items-center justify-center space-x-2 shadow-md hover:bg-[#d8b135] transition-colors"
+                      disabled={sending}
+                      className="w-full py-3.5 rounded bg-[#c9a227] text-[#1a3d2e] font-bold text-xs uppercase tracking-wider text-center flex items-center justify-center space-x-2 shadow-md hover:bg-[#d8b135] transition-colors disabled:opacity-60"
                     >
-                      <span>REQUEST A QUOTE →</span>
+                      <span>{sending ? 'SENDING...' : 'REQUEST A QUOTE →'}</span>
                     </button>
                   </div>
                 </div>
