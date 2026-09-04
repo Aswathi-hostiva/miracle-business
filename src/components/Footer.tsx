@@ -10,17 +10,17 @@ export const Footer: React.FC = () => {
           
           {/* Brand Col */}
           <div className="md:col-span-6 space-y-4 text-center md:text-left">
-            <div className="flex items-center justify-center md:justify-start space-x-3">
+            <div className="flex items-center justify-center md:justify-start space-x-1">
               <Image
                 src="/images/miracle_png.png"
                 alt="Taste of Miracle logo"
-                width={480}
-                height={240}
-                className="h-32 w-auto shrink-0 object-contain"
+                width={200}
+                height={200}
+                className="h-32 sm:h-36 w-auto shrink-0 object-contain -mr-3"
               />
               <div>
                 <h3 className="font-serif text-xl sm:text-2xl font-bold text-[#c9a227] tracking-wider">TASTE OF MIRACLE™️</h3>
-                <p className="text-[10px] text-[#f4efe6]/70 uppercase tracking-widest font-mono">MIRACLE BUSINESS HUB</p>
+                <p className="text-[10px] sm:text-xs text-[#f4efe6]/70 uppercase tracking-widest font-mono">MIRACLE BUSINESS HUB</p>
               </div>
             </div>
             <p className="text-xs text-[#f4efe6]/80 leading-relaxed max-w-md mx-auto md:mx-0">
