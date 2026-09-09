@@ -1,5 +1,9 @@
+'use client';
+
+import React, { useState, useRef } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import emailjs from '@emailjs/browser';
 import { Navbar } from '@/components/Navbar';
 import { Footer } from '@/components/Footer';
 import { RiceBagPackaging } from '@/components/RiceBagPackaging';
@@ -7,9 +11,53 @@ import { SingleRicePacket } from '@/components/SingleRicePacket';
 import { GlobalMapGraphic } from '@/components/GlobalMapGraphic';
 import { IconSetCollection } from '@/components/IconSetCollection';
 import { BackgroundTextureWatermark } from '@/components/BackgroundTextureWatermark';
-import { ArrowRight, Building2, ShoppingBag, Store, Utensils, Warehouse, ShoppingCart } from 'lucide-react';
+import { ArrowRight, Building2, ShoppingBag, Store, Utensils, Warehouse, ShoppingCart, CheckCircle2, Phone, Mail, MapPin } from 'lucide-react';
 
 export default function Home() {
+  const [submitted, setSubmitted] = useState(false);
+  const [sending, setSending] = useState(false);
+  const formRef = useRef<HTMLFormElement>(null);
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    if (!formRef.current) return;
+
+    setSending(true);
+
+    emailjs
+      .sendForm(
+        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
+        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!,
+        formRef.current,
+        process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!
+      )
+      .then(() => {
+        setSubmitted(true);
+        setSending(false);
+        formRef.current?.reset();
+      })
+      .catch((error) => {
+        console.error('EmailJS error:', error);
+        setSending(false);
+        alert('Something went wrong. Please try again or contact us directly.');
+      });
+  };
+
+  const productOptions = [
+    '1121 Steam Basmati Rice',
+    '1121 Sella Basmati Rice',
+    '1121 Golden Sella Basmati Rice',
+    '1121 Creamy Sella Basmati Rice',
+    '1509 Steam Basmati Rice',
+    '1509 Golden Sella Basmati Rice',
+    '1509 Creamy Sella Basmati Rice'
+  ];
+
+  const packageSizes = [
+    '1 KG', '2 KG', '5 KG', '10 KG', '20 KG', '25 KG', '30 KG', '40 KG', '50 KG', 'Custom Private Label OEM'
+  ];
+
   const official7HomeProducts = [
     {
       id: '1121-steam',
@@ -360,41 +408,162 @@ export default function Home() {
       <section className="relative z-10 w-full py-16 sm:py-24 bg-[#1a3d2e] text-[#f4efe6] px-4 sm:px-6 lg:px-8 border-t border-[#c9a227]/30">
         <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
           
-          <div className="lg:col-span-5 space-y-4">
-            <h2 className="font-serif text-3xl sm:text-4xl font-bold leading-tight">
-              LET'S BUILD A GLOBAL PARTNERSHIP
-            </h2>
-            <p className="text-xs sm:text-sm text-[#f4efe6]/80 leading-relaxed font-light">
+          <div className="lg:col-span-4 space-y-6">
+            <div>
+              <h1 className="font-serif text-3xl sm:text-4xl font-bold text-[#f4efe6] leading-tight">
+                LET'S BUILD A
+              </h1>
+              <h1 className="font-serif text-3xl sm:text-4xl font-bold text-[#f4efe6] leading-tight">
+                GLOBAL PARTNERSHIP
+              </h1>
+            </div>
+
+            <p className="text-xs sm:text-sm text-[#f4efe6]/80 leading-relaxed font-sans">
               Tell us what you need and our export team will prepare a competitive quotation based on your requirements.
             </p>
 
-            <div className="pt-4 space-y-2 text-xs text-[#f4efe6]/90 font-mono">
-              <p>📞 +91 97447 59329 | +968 93843 669</p>
-              <p>✉️ info@miraclebusinesshub.com</p>
-              <p>📍 Kerala, India | Sohar, Oman</p>
+            <div className="space-y-4 pt-4 text-xs sm:text-sm text-[#f4efe6]">
+              <div className="flex items-center space-x-3">
+                <div className="w-8 h-8 rounded-full border border-[#c9a227] flex items-center justify-center text-[#c9a227] bg-[#10291e] shrink-0">
+                  <Phone className="w-4 h-4" />
+                </div>
+                <div className="font-mono text-xs">
+                  <p>+91 97447 59329</p>
+                  <p>+968 93843 669</p>
+                </div>
+              </div>
+
+              <div className="flex items-center space-x-3">
+                <div className="w-8 h-8 rounded-full border border-[#c9a227] flex items-center justify-center text-[#c9a227] bg-[#10291e] shrink-0">
+                  <Mail className="w-4 h-4" />
+                </div>
+                <div className="text-xs">
+                  <p>info@miraclebusinesshub.com</p>
+                  <p>miraclegulfbusiness@gmail.com</p>
+                </div>
+              </div>
+
+              <div className="flex items-center space-x-3">
+                <div className="w-8 h-8 rounded-full border border-[#c9a227] flex items-center justify-center text-[#c9a227] bg-[#10291e] shrink-0">
+                  <MapPin className="w-4 h-4" />
+                </div>
+                <div className="text-xs">
+                  <p>Kerala, India | Sohar, Oman</p>
+                </div>
+              </div>
             </div>
           </div>
 
-          <div className="lg:col-span-7 bg-[#10291e] p-6 sm:p-8 rounded border border-[#c9a227]/30 shadow-xl">
-            <form className="space-y-4">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <input type="text" placeholder="Your Name *" className="w-full px-4 py-2.5 rounded bg-[#1a3d2e] border border-[#c9a227]/30 text-xs text-[#f4efe6]" required />
-                <input type="text" placeholder="Company Name *" className="w-full px-4 py-2.5 rounded bg-[#1a3d2e] border border-[#c9a227]/30 text-xs text-[#f4efe6]" required />
+          <div className="lg:col-span-8 bg-[#10291e] p-6 sm:p-8 rounded-lg border border-[#c9a227]/30 shadow-2xl">
+            {submitted ? (
+              <div className="p-8 text-center space-y-4">
+                <CheckCircle2 className="w-12 h-12 text-[#c9a227] mx-auto" />
+                <h3 className="font-serif text-xl font-bold text-[#f4efe6]">Quotation Request Received</h3>
+                <p className="text-xs text-[#f4efe6]/80">
+                  Our export team will send the official CIF/FOB quotation to your email shortly.
+                </p>
+                <button
+                  onClick={() => setSubmitted(false)}
+                  className="px-6 py-2 bg-[#c9a227] text-[#1a3d2e] font-bold text-xs rounded uppercase"
+                >
+                  Submit Another Inquiry
+                </button>
               </div>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <input type="tel" placeholder="WhatsApp / Phone *" className="w-full px-4 py-2.5 rounded bg-[#1a3d2e] border border-[#c9a227]/30 text-xs text-[#f4efe6]" required />
-                <input type="email" placeholder="Email *" className="w-full px-4 py-2.5 rounded bg-[#1a3d2e] border border-[#c9a227]/30 text-xs text-[#f4efe6]" required />
-              </div>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <input type="text" placeholder="Country *" className="w-full px-4 py-2.5 rounded bg-[#1a3d2e] border border-[#c9a227]/30 text-xs text-[#f4efe6]" required />
-                <input type="text" placeholder="Destination Port *" className="w-full px-4 py-2.5 rounded bg-[#1a3d2e] border border-[#c9a227]/30 text-xs text-[#f4efe6]" required />
-              </div>
-              <textarea rows={3} placeholder="Message / Quantity Requirements..." className="w-full px-4 py-2.5 rounded bg-[#1a3d2e] border border-[#c9a227]/30 text-xs text-[#f4efe6]"></textarea>
-              
-              <Link href="/contact" className="w-full py-3.5 rounded bg-[#c9a227] text-[#1a3d2e] font-bold text-xs uppercase tracking-wider text-center block shadow hover:bg-[#d8b135] transition-colors">
-                REQUEST A QUOTE →
-              </Link>
-            </form>
+            ) : (
+              <form ref={formRef} onSubmit={handleSubmit} className="space-y-4">
+                
+                {/* Row 1: Your Name*, Company Name, Email* */}
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                  <input 
+                    type="text" 
+                    name="name"
+                    placeholder="Your Name *" 
+                    className="w-full px-4 py-3 rounded bg-[#1a3d2e] border border-[#c9a227]/30 text-xs text-[#f4efe6] placeholder-[#f4efe6]/60 focus:outline-none focus:border-[#c9a227]" 
+                    required
+                  />
+                  <input 
+                    type="text" 
+                    name="company"
+                    placeholder="Company Name" 
+                    className="w-full px-4 py-3 rounded bg-[#1a3d2e] border border-[#c9a227]/30 text-xs text-[#f4efe6] placeholder-[#f4efe6]/60 focus:outline-none focus:border-[#c9a227]" 
+                  />
+                  <input 
+                    type="email" 
+                    name="email"
+                    placeholder="Email *" 
+                    className="w-full px-4 py-3 rounded bg-[#1a3d2e] border border-[#c9a227]/30 text-xs text-[#f4efe6] placeholder-[#f4efe6]/60 focus:outline-none focus:border-[#c9a227]" 
+                    required
+                  />
+                </div>
+
+                {/* Row 2: WhatsApp/Phone*, Country, Required Rice Variety */}
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                  <input 
+                    type="tel" 
+                    name="whatsapp"
+                    placeholder="WhatsApp / Phone *" 
+                    className="w-full px-4 py-3 rounded bg-[#1a3d2e] border border-[#c9a227]/30 text-xs text-[#f4efe6] placeholder-[#f4efe6]/60 focus:outline-none focus:border-[#c9a227]" 
+                    required
+                  />
+                  <input 
+                    type="text" 
+                    name="country"
+                    placeholder="Country" 
+                    className="w-full px-4 py-3 rounded bg-[#1a3d2e] border border-[#c9a227]/30 text-xs text-[#f4efe6] placeholder-[#f4efe6]/60 focus:outline-none focus:border-[#c9a227]" 
+                  />
+                  <select name="rice_variety" className="w-full px-4 py-3 rounded bg-[#1a3d2e] border border-[#c9a227]/30 text-xs text-[#f4efe6] focus:outline-none focus:border-[#c9a227]">
+                    <option value="">Required Rice Variety</option>
+                    {productOptions.map((opt) => (
+                      <option key={opt} value={opt}>{opt}</option>
+                    ))}
+                  </select>
+                </div>
+
+                {/* Row 3: Packing Size, Required Quantity, Destination Port */}
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                  <select name="packing_size" className="w-full px-4 py-3 rounded bg-[#1a3d2e] border border-[#c9a227]/30 text-xs text-[#f4efe6] focus:outline-none focus:border-[#c9a227]">
+                    <option value="">Packing Size</option>
+                    {packageSizes.map((sz) => (
+                      <option key={sz} value={sz}>{sz}</option>
+                    ))}
+                  </select>
+                  <input 
+                    type="text" 
+                    name="quantity"
+                    placeholder="Required Quantity" 
+                    className="w-full px-4 py-3 rounded bg-[#1a3d2e] border border-[#c9a227]/30 text-xs text-[#f4efe6] placeholder-[#f4efe6]/60 focus:outline-none focus:border-[#c9a227]" 
+                  />
+                  <input 
+                    type="text" 
+                    name="destination_port"
+                    placeholder="Destination Port" 
+                    className="w-full px-4 py-3 rounded bg-[#1a3d2e] border border-[#c9a227]/30 text-xs text-[#f4efe6] placeholder-[#f4efe6]/60 focus:outline-none focus:border-[#c9a227]" 
+                  />
+                </div>
+
+                {/* Message Field & Submit Button */}
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 items-end pt-2">
+                  <div className="lg:col-span-8">
+                    <textarea 
+                      rows={2} 
+                      name="message"
+                      placeholder="Message" 
+                      className="w-full px-4 py-3 rounded bg-[#1a3d2e] border border-[#c9a227]/30 text-xs text-[#f4efe6] placeholder-[#f4efe6]/60 focus:outline-none focus:border-[#c9a227]"
+                    ></textarea>
+                  </div>
+                  <div className="lg:col-span-4">
+                    <button 
+                      type="submit" 
+                      disabled={sending}
+                      className="w-full py-3.5 rounded bg-[#c9a227] text-[#1a3d2e] font-bold text-xs uppercase tracking-wider text-center flex items-center justify-center space-x-2 shadow-md hover:bg-[#d8b135] transition-colors disabled:opacity-60"
+                    >
+                      <span>{sending ? 'SENDING...' : 'REQUEST A QUOTE →'}</span>
+                    </button>
+                  </div>
+                </div>
+
+              </form>
+            )}
           </div>
 
         </div>
@@ -405,3 +574,4 @@ export default function Home() {
     </div>
   );
 }
+

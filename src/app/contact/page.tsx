@@ -128,7 +128,7 @@ export default function ContactPage() {
             ) : (
               <form ref={formRef} onSubmit={handleSubmit} className="space-y-4">
                 
-                {/* Row 1: Your Name*, Company Name*, Email* */}
+                {/* Row 1: Your Name*, Company Name, Email* */}
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                   <input 
                     type="text" 
@@ -140,9 +140,8 @@ export default function ContactPage() {
                   <input 
                     type="text" 
                     name="company"
-                    placeholder="Company Name *" 
+                    placeholder="Company Name" 
                     className="w-full px-4 py-3 rounded bg-[#1a3d2e] border border-[#c9a227]/30 text-xs text-[#f4efe6] placeholder-[#f4efe6]/60 focus:outline-none focus:border-[#c9a227]" 
-                    required
                   />
                   <input 
                     type="email" 
@@ -153,7 +152,7 @@ export default function ContactPage() {
                   />
                 </div>
 
-                {/* Row 2: WhatsApp/Phone*, Country*, Required Rice Variety* */}
+                {/* Row 2: WhatsApp/Phone*, Country, Required Rice Variety */}
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                   <input 
                     type="tel" 
@@ -165,22 +164,21 @@ export default function ContactPage() {
                   <input 
                     type="text" 
                     name="country"
-                    placeholder="Country *" 
+                    placeholder="Country" 
                     className="w-full px-4 py-3 rounded bg-[#1a3d2e] border border-[#c9a227]/30 text-xs text-[#f4efe6] placeholder-[#f4efe6]/60 focus:outline-none focus:border-[#c9a227]" 
-                    required
                   />
                   <select name="rice_variety" className="w-full px-4 py-3 rounded bg-[#1a3d2e] border border-[#c9a227]/30 text-xs text-[#f4efe6] focus:outline-none focus:border-[#c9a227]">
-                    <option value="">Required Rice Variety *</option>
+                    <option value="">Required Rice Variety</option>
                     {productOptions.map((opt) => (
                       <option key={opt} value={opt}>{opt}</option>
                     ))}
                   </select>
                 </div>
 
-                {/* Row 3: Packing Size*, Required Quantity*, Destination Port* */}
+                {/* Row 3: Packing Size, Required Quantity, Destination Port */}
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                   <select name="packing_size" className="w-full px-4 py-3 rounded bg-[#1a3d2e] border border-[#c9a227]/30 text-xs text-[#f4efe6] focus:outline-none focus:border-[#c9a227]">
-                    <option value="">Packing Size *</option>
+                    <option value="">Packing Size</option>
                     {packageSizes.map((sz) => (
                       <option key={sz} value={sz}>{sz}</option>
                     ))}
@@ -188,16 +186,14 @@ export default function ContactPage() {
                   <input 
                     type="text" 
                     name="quantity"
-                    placeholder="Required Quantity *" 
+                    placeholder="Required Quantity" 
                     className="w-full px-4 py-3 rounded bg-[#1a3d2e] border border-[#c9a227]/30 text-xs text-[#f4efe6] placeholder-[#f4efe6]/60 focus:outline-none focus:border-[#c9a227]" 
-                    required
                   />
                   <input 
                     type="text" 
                     name="destination_port"
-                    placeholder="Destination Port *" 
+                    placeholder="Destination Port" 
                     className="w-full px-4 py-3 rounded bg-[#1a3d2e] border border-[#c9a227]/30 text-xs text-[#f4efe6] placeholder-[#f4efe6]/60 focus:outline-none focus:border-[#c9a227]" 
-                    required
                   />
                 </div>
 
