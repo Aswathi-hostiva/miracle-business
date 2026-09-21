@@ -16,8 +16,8 @@ export const metadata: Metadata = {
   title: "Taste Of Miracle",
   description: "Premium quality rice and food products from Taste Of Miracle.",
   icons: {
-    icon: "/images/miracle_png.png",
-  },
+  icon: "/images/miracle_favicon.png",
+},
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
